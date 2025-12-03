@@ -21,7 +21,7 @@
 body {
   font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
   background: 
-    linear-gradient(135deg, rgba(0, 20, 10, 0.95) 0%, rgba(0, 30, 20, 0.9) 100%),
+    linear-gradient(135deg, rgba(0, 20, 10, 0.3) 0%, rgba(0, 30, 20, 0.25) 100%),
     url('/images/pxArt.png');
   background-size: cover;
   background-position: center;
@@ -31,6 +31,232 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Corrosive Ocean Water Effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 80%, rgba(0, 255, 100, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 90%, rgba(0, 200, 150, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(100, 255, 150, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 998;
+  animation: corrosive-wave 8s ease-in-out infinite;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+
+/* Toxic Acidic Rain Layer */
+.acidic-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 996;
+  overflow: hidden;
+  opacity: 0.7;
+}
+
+.acidic-rain::before,
+.acidic-rain::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(180deg,
+    rgba(0, 255, 100, 0.8) 0%,
+    rgba(0, 255, 150, 0.6) 30%,
+    rgba(0, 200, 150, 0.4) 60%,
+    transparent 100%);
+  animation: rain-fall linear infinite;
+  box-shadow: 
+    0 0 6px rgba(0, 255, 100, 0.8),
+    0 0 12px rgba(0, 255, 150, 0.6);
+}
+
+.acidic-rain::before {
+  left: 10%;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  box-shadow: 
+    0 0 6px rgba(0, 255, 100, 0.8),
+    0 0 12px rgba(0, 255, 150, 0.6),
+    200px 300px 0 rgba(0, 255, 100, 0.7),
+    400px 500px 0 rgba(0, 255, 150, 0.6),
+    600px 200px 0 rgba(0, 200, 150, 0.7),
+    800px 400px 0 rgba(0, 255, 100, 0.6),
+    1000px 600px 0 rgba(0, 255, 150, 0.7),
+    1200px 100px 0 rgba(0, 200, 150, 0.6),
+    1400px 350px 0 rgba(0, 255, 100, 0.7),
+    1600px 250px 0 rgba(0, 255, 150, 0.6);
+}
+
+.acidic-rain::after {
+  left: 50%;
+  animation-duration: 1.2s;
+  animation-delay: 0.5s;
+  box-shadow: 
+    0 0 6px rgba(0, 255, 100, 0.8),
+    0 0 12px rgba(0, 255, 150, 0.6),
+    150px 400px 0 rgba(0, 255, 150, 0.7),
+    350px 200px 0 rgba(0, 200, 150, 0.6),
+    550px 500px 0 rgba(0, 255, 100, 0.7),
+    750px 300px 0 rgba(0, 255, 150, 0.6),
+    950px 100px 0 rgba(0, 200, 150, 0.7),
+    1150px 450px 0 rgba(0, 255, 100, 0.6),
+    1350px 150px 0 rgba(0, 255, 150, 0.7),
+    1550px 550px 0 rgba(0, 200, 150, 0.6);
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100vh + 100px));
+    opacity: 0;
+  }
+}
+
+/* Additional rain streaks for more density */
+.acidic-rain {
+  background-image: 
+    linear-gradient(90deg, transparent 0%, rgba(0, 255, 100, 0.3) 1%, transparent 2%),
+    linear-gradient(90deg, transparent 0%, rgba(0, 255, 150, 0.25) 1%, transparent 2%),
+    linear-gradient(90deg, transparent 0%, rgba(0, 200, 150, 0.2) 1%, transparent 2%);
+  background-size: 
+    3px 100px,
+    2px 80px,
+    2.5px 120px;
+  background-position: 
+    5% 0,
+    25% 0,
+    45% 0,
+    65% 0,
+    85% 0;
+  animation: rain-streaks 0.8s linear infinite;
+}
+
+@keyframes rain-streaks {
+  0% {
+    background-position: 
+      5% -100px,
+      25% -80px,
+      45% -120px,
+      65% -100px,
+      85% -90px;
+  }
+  100% {
+    background-position: 
+      5% calc(100vh + 100px),
+      25% calc(100vh + 80px),
+      45% calc(100vh + 120px),
+      65% calc(100vh + 100px),
+      85% calc(100vh + 90px);
+  }
+}
+
+@keyframes corrosive-wave {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateY(-10px) scale(1.05);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translateY(-10px) scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Rust and Corrosion Particles */
+.corrosion-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 997;
+  overflow: hidden;
+  opacity: 0.4;
+}
+
+.corrosion-particles::before,
+.corrosion-particles::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(139, 69, 19, 0.6) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float-corrosion 15s infinite;
+}
+
+.corrosion-particles::before {
+  left: 10%;
+  animation-delay: 0s;
+  box-shadow: 
+    200px 300px 0 rgba(139, 69, 19, 0.4),
+    400px 500px 0 rgba(160, 82, 45, 0.3),
+    600px 200px 0 rgba(139, 69, 19, 0.5),
+    800px 400px 0 rgba(160, 82, 45, 0.4),
+    1000px 600px 0 rgba(139, 69, 19, 0.3);
+}
+
+.corrosion-particles::after {
+  left: 50%;
+  animation-delay: 5s;
+  box-shadow: 
+    150px 400px 0 rgba(160, 82, 45, 0.4),
+    350px 200px 0 rgba(139, 69, 19, 0.5),
+    550px 500px 0 rgba(160, 82, 45, 0.3),
+    750px 300px 0 rgba(139, 69, 19, 0.4),
+    950px 100px 0 rgba(160, 82, 45, 0.5);
+}
+
+@keyframes float-corrosion {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(90deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-40px) translateX(-10px) rotate(180deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(-20px) translateX(5px) rotate(270deg);
+    opacity: 0.5;
+  }
 }
 
 /* CRT Scanlines Effect */
@@ -42,14 +268,15 @@ body {
   height: 100%;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.08),
+    rgba(0, 0, 0, 0.08) 1px,
     transparent 1px,
     transparent 2px
   );
   pointer-events: none;
   z-index: 1000;
   animation: scanline 8s linear infinite;
+  opacity: 0.6;
 }
 
 @keyframes scanline {
@@ -66,12 +293,40 @@ body {
   height: 100%;
   background: radial-gradient(
     circle at center,
-    rgba(0, 255, 65, 0.03) 0%,
+    rgba(0, 255, 65, 0.015) 0%,
     transparent 70%
   );
   pointer-events: none;
   z-index: 999;
   animation: pulse-glow 4s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Underwater Distortion Effect */
+.terminal-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 30% 70%, rgba(0, 255, 100, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(0, 200, 150, 0.025) 0%, transparent 50%);
+  animation: underwater-distortion 6s ease-in-out infinite;
+  filter: blur(1px);
+  opacity: 0.5;
+}
+
+@keyframes underwater-distortion {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.05);
+    opacity: 0.7;
+  }
 }
 
 @keyframes pulse-glow {
@@ -83,18 +338,183 @@ body {
 .terminal-container {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 40px 20px;
   perspective: 1000px;
+  position: relative;
+}
+
+/* Transparency Control */
+.transparency-control {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: rgba(10, 14, 26, 0.9);
+  border: 1px solid var(--terminal-green);
+  border-radius: 4px;
+  padding: 8px 10px;
+  z-index: 2000;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 65, 0.3),
+    inset 0 0 8px rgba(0, 255, 65, 0.1);
+  backdrop-filter: blur(10px);
+  min-width: 140px;
+  animation: fade-in 0.5s ease;
+}
+
+.transparency-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 6px;
+  color: var(--terminal-green);
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--terminal-green);
+}
+
+.transparency-icon {
+  font-size: 0.8rem;
+}
+
+.transparency-text {
+  flex: 1;
+  font-family: monospace;
+  font-size: 0.65rem;
+}
+
+.transparency-value {
+  color: var(--terminal-cyan);
+  font-family: monospace;
+  text-shadow: 0 0 5px var(--terminal-cyan);
+  font-size: 0.65rem;
+}
+
+.transparency-slider {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--terminal-border);
+  border-radius: 2px;
+  outline: none;
+  margin-bottom: 6px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.transparency-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--terminal-green);
+  border: 1.5px solid var(--terminal-cyan);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 
+    0 0 8px var(--terminal-green),
+    0 0 15px rgba(0, 255, 65, 0.5);
+  transition: all 0.2s;
+}
+
+.transparency-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 
+    0 0 12px var(--terminal-green),
+    0 0 25px rgba(0, 255, 65, 0.7);
+}
+
+.transparency-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--terminal-green);
+  border: 1.5px solid var(--terminal-cyan);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 
+    0 0 8px var(--terminal-green),
+    0 0 15px rgba(0, 255, 65, 0.5);
+  transition: all 0.2s;
+}
+
+.transparency-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 
+    0 0 12px var(--terminal-green),
+    0 0 25px rgba(0, 255, 65, 0.7);
+}
+
+.transparency-buttons {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.transparency-btn {
+  flex: 1;
+  padding: 4px 6px;
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid var(--terminal-border);
+  border-radius: 2px;
+  color: var(--terminal-text);
+  font-size: 0.6rem;
+  font-family: monospace;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-shadow: 0 0 3px var(--terminal-green);
+  min-width: 30px;
+}
+
+.transparency-btn:hover {
+  background: rgba(0, 255, 65, 0.2);
+  border-color: var(--terminal-green);
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+  transform: translateY(-1px);
+}
+
+.transparency-btn:active {
+  transform: translateY(0);
 }
 
 .terminal-frame {
-  width: 100%;
-  max-width: 1800px;
+  width: 85%;
+  max-width: 1200px;
   position: relative;
   transform-style: preserve-3d;
   animation: terminal-appear 1s ease-out;
+  filter: drop-shadow(0 0 30px rgba(0, 255, 100, 0.3));
+}
+
+/* 3D Depth Effect */
+.terminal-frame::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, 
+    rgba(0, 255, 100, 0.1) 0%,
+    rgba(0, 200, 150, 0.05) 50%,
+    transparent 100%);
+  border-radius: 8px;
+  z-index: -1;
+  animation: depth-pulse 3s ease-in-out infinite;
+  filter: blur(10px);
+}
+
+@keyframes depth-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.02);
+  }
 }
 
 @keyframes terminal-appear {
@@ -109,28 +529,139 @@ body {
 }
 
 .terminal-screen {
-  background: var(--terminal-bg);
-  border: 3px solid var(--terminal-border);
-  border-radius: 8px;
+  background: rgba(10, 14, 26, var(--terminal-transparency, 0.85));
+  border: 2px solid var(--terminal-border);
+  border-radius: 6px;
   box-shadow: 
-    0 0 30px rgba(0, 255, 65, 0.3),
-    0 0 60px rgba(0, 255, 65, 0.1),
-    inset 0 0 50px rgba(0, 0, 0, 0.5),
-    0 20px 60px rgba(0, 0, 0, 0.8);
+    0 0 20px rgba(0, 255, 65, 0.25),
+    0 0 40px rgba(0, 255, 65, 0.08),
+    inset 0 0 30px rgba(0, 0, 0, 0.4),
+    0 15px 40px rgba(0, 0, 0, 0.6);
   position: relative;
   overflow: hidden;
   transform: translateZ(0);
+  backdrop-filter: blur(5px);
+  transition: background-color 0.3s ease;
+}
+
+/* Corrosion Effect on Terminal Edges */
+.terminal-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(139, 69, 19, 0.1) 2%, transparent 4%),
+    linear-gradient(0deg, transparent 0%, rgba(160, 82, 45, 0.08) 2%, transparent 4%);
+  pointer-events: none;
+  z-index: 1;
+  animation: corrosion-edge 12s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+@keyframes corrosion-edge {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    opacity: 0.5;
+    transform: translateX(2px) translateY(-1px);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateX(-1px) translateY(2px);
+  }
+  75% {
+    opacity: 0.5;
+    transform: translateX(1px) translateY(-1px);
+  }
+}
+
+/* Acidic Water Drips */
+.terminal-screen::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 10%;
+  width: 3px;
+  height: 20px;
+  background: linear-gradient(180deg, 
+    rgba(0, 255, 100, 0.4) 0%,
+    rgba(0, 200, 150, 0.3) 50%,
+    transparent 100%);
+  border-radius: 0 0 2px 2px;
+  animation: acid-drip 4s ease-in-out infinite;
+  z-index: 2;
+  box-shadow: 
+    0 0 8px rgba(0, 255, 100, 0.5),
+    0 0 15px rgba(0, 200, 150, 0.3);
+}
+
+@keyframes acid-drip {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+    height: 0;
+  }
+  10% {
+    opacity: 1;
+    height: 20px;
+  }
+  90% {
+    transform: translateY(100px);
+    opacity: 0.8;
+    height: 15px;
+  }
+  100% {
+    transform: translateY(120px);
+    opacity: 0;
+    height: 0;
+  }
 }
 
 /* Terminal Header */
 .terminal-header {
   background: linear-gradient(180deg, #1a2a1f 0%, #0d1a14 100%);
   border-bottom: 2px solid var(--terminal-green);
-  padding: 12px 20px;
+  padding: 8px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 10px rgba(0, 255, 65, 0.2);
+  position: relative;
+  z-index: 3;
+}
+
+/* Corrosive water line at header */
+.terminal-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 255, 100, 0.4) 20%,
+    rgba(0, 200, 150, 0.5) 50%,
+    rgba(0, 255, 100, 0.4) 80%,
+    transparent 100%);
+  animation: water-line 3s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(0, 255, 100, 0.5);
+}
+
+@keyframes water-line {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(5px);
+  }
 }
 
 .terminal-header-left {
@@ -179,9 +710,39 @@ body {
 /* Terminal Content Area */
 .terminal-content {
   display: flex;
-  gap: 15px;
-  padding: 15px;
-  min-height: 600px;
+  gap: 12px;
+  padding: 12px;
+  min-height: 500px;
+  max-height: 75vh;
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Underwater pressure effect on scroll */
+.terminal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(0, 255, 100, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+  animation: pressure-wave 5s ease-in-out infinite;
+}
+
+@keyframes pressure-wave {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-10px) scaleY(1.1);
+    opacity: 0.5;
+  }
 }
 
 .main-terminal-panel {
@@ -190,26 +751,54 @@ body {
 }
 
 .terminal-sidebar {
-  width: 320px;
+  width: 260px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
   flex-shrink: 0;
 }
 
 /* Collapsible Panel Styles */
 .terminal-panel {
-  background: var(--terminal-panel);
+  background: rgba(13, 26, 20, var(--terminal-transparency, 0.85));
   border: 2px solid var(--terminal-border);
   border-radius: 4px;
   box-shadow: 
     0 4px 15px rgba(0, 0, 0, 0.5),
     inset 0 0 20px rgba(0, 255, 65, 0.05),
     0 0 20px rgba(0, 255, 65, 0.1);
-  transform: translateZ(10px);
-  transition: all 0.3s ease;
+  transform: translateZ(10px) perspective(1000px);
+  transition: all 0.3s ease, background-color 0.3s ease;
   position: relative;
   overflow: hidden;
+}
+
+/* Rust spots on panels */
+.terminal-panel::before {
+  content: '';
+  position: absolute;
+  top: 5%;
+  right: 3%;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(139, 69, 19, 0.6) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+  animation: rust-spread 10s ease-in-out infinite;
+  box-shadow: 
+    150px 200px 0 rgba(160, 82, 45, 0.4),
+    300px 100px 0 rgba(139, 69, 19, 0.5);
+}
+
+@keyframes rust-spread {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.7;
+  }
 }
 
 .terminal-panel::before {
@@ -232,8 +821,10 @@ body {
   box-shadow: 
     0 6px 20px rgba(0, 0, 0, 0.6),
     inset 0 0 30px rgba(0, 255, 65, 0.08),
-    0 0 30px rgba(0, 255, 65, 0.15);
-  transform: translateZ(15px) translateY(-2px);
+    0 0 30px rgba(0, 255, 65, 0.15),
+    0 0 40px rgba(0, 200, 150, 0.2);
+  transform: translateZ(15px) translateY(-2px) rotateX(2deg);
+  filter: drop-shadow(0 5px 15px rgba(0, 255, 100, 0.3));
 }
 
 .terminal-panel.collapsed {
@@ -242,7 +833,7 @@ body {
 
 .terminal-panel-header {
   background: linear-gradient(180deg, #1a2a1f 0%, #0f1f17 100%);
-  padding: 10px 15px;
+  padding: 8px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -299,7 +890,7 @@ body {
 }
 
 .terminal-panel-content {
-  padding: 20px;
+  padding: 15px;
   animation: fade-in 0.3s ease;
 }
 
@@ -316,11 +907,11 @@ body {
 
 .archive-meta {
   display: flex;
-  gap: 20px;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
+  gap: 15px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--terminal-border);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   flex-wrap: wrap;
 }
 
@@ -334,19 +925,19 @@ body {
 
 .archive-notice {
   background: rgba(0, 255, 65, 0.05);
-  border-left: 3px solid var(--terminal-green);
-  padding: 12px 15px;
-  margin-bottom: 25px;
-  font-size: 0.85rem;
+  border-left: 2px solid var(--terminal-green);
+  padding: 8px 12px;
+  margin-bottom: 15px;
+  font-size: 0.75rem;
   color: var(--terminal-dim);
   font-family: monospace;
-  line-height: 1.6;
+  line-height: 1.5;
   font-style: italic;
 }
 
 .scene-title {
-  font-size: 2rem;
-  margin-bottom: 25px;
+  font-size: 1.6rem;
+  margin-bottom: 15px;
   color: var(--terminal-green);
   text-shadow: 
     0 0 10px var(--terminal-green),
@@ -357,26 +948,55 @@ body {
 }
 
 .scene-text {
-  font-size: 1rem;
-  margin-bottom: 30px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
   color: var(--terminal-text);
   text-align: justify;
+  position: relative;
+  z-index: 2;
 }
 
 .scene-text p {
-  margin-bottom: 15px;
-  line-height: 1.9;
+  margin-bottom: 12px;
+  line-height: 1.7;
+  position: relative;
+}
+
+/* Subtle text shimmer from corrosive glow */
+.scene-text p::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(0, 255, 100, 0.1) 50%,
+    transparent 100%);
+  animation: text-shimmer 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes text-shimmer {
+  0%, 100% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
 }
 
 /* Choices */
 .choices-container {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .terminal-prompt-choice {
   color: var(--terminal-cyan);
-  font-size: 0.9rem;
-  margin-bottom: 15px;
+  font-size: 0.8rem;
+  margin-bottom: 12px;
   font-weight: bold;
   text-shadow: 0 0 5px var(--terminal-cyan);
 }
@@ -384,14 +1004,14 @@ body {
 .choice-button {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 18px;
-  margin-bottom: 10px;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
   background: rgba(0, 255, 65, 0.05);
   border: 1px solid var(--terminal-border);
-  border-left: 3px solid var(--terminal-green);
+  border-left: 2px solid var(--terminal-green);
   color: var(--terminal-text);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: left;
@@ -416,8 +1036,36 @@ body {
   border-left-color: var(--terminal-cyan);
   box-shadow: 
     0 0 15px rgba(0, 255, 65, 0.3),
-    inset 0 0 10px rgba(0, 255, 65, 0.1);
-  transform: translateX(5px) translateZ(5px);
+    inset 0 0 10px rgba(0, 255, 65, 0.1),
+    0 0 20px rgba(0, 200, 150, 0.2);
+  transform: translateX(5px) translateZ(5px) rotateY(2deg);
+  position: relative;
+}
+
+/* Acidic glow on hover */
+.choice-button:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(0, 255, 100, 0.1) 50%,
+    transparent 100%);
+  animation: acid-sweep 1.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes acid-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .choice-button:hover::before {
@@ -428,8 +1076,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   background: rgba(0, 255, 65, 0.2);
   border: 1px solid var(--terminal-green);
   border-radius: 2px;
@@ -438,6 +1086,7 @@ body {
   flex-shrink: 0;
   text-shadow: 0 0 5px var(--terminal-green);
   font-family: monospace;
+  font-size: 0.8rem;
 }
 
 .choice-label {
@@ -613,14 +1262,14 @@ body {
 }
 
 .ending-title {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: var(--terminal-green);
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   text-shadow: 
     0 0 15px var(--terminal-green),
     0 0 30px var(--terminal-green);
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
 }
 
 .ending-badge {
@@ -666,8 +1315,8 @@ body {
 }
 
 .ending-summary {
-  margin-top: 30px;
-  padding: 20px;
+  margin-top: 20px;
+  padding: 15px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 2px;
   border: 1px solid var(--terminal-border);
@@ -713,9 +1362,9 @@ body {
 .terminal-footer {
   background: linear-gradient(180deg, #0d1a14 0%, #0a0e1a 100%);
   border-top: 2px solid var(--terminal-border);
-  padding: 10px 20px;
+  padding: 6px 15px;
   color: var(--terminal-dim);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-family: monospace;
   text-shadow: 0 0 5px var(--terminal-dim);
 }

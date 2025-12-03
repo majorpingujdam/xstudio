@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useStoryEngine } from './story/StoryEngine';
 import { ChoiceButton } from './components/ChoiceButton';
 import { TowerSidebar } from './components/TowerSidebar';
 import { RelationshipMeter } from './components/RelationshipMeter';
 import { CollapsiblePanel } from './components/CollapsiblePanel';
+import { TransparencyControl } from './components/TransparencyControl';
 import './styles.css';
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
     getSceneChoices,
     restart,
   } = useStoryEngine();
+
+  const [terminalTransparency, setTerminalTransparency] = useState(0.85);
 
   const choiceButtonsRef = useRef<HTMLButtonElement[]>([]);
 
@@ -45,8 +48,15 @@ function App() {
 
   return (
     <div className="terminal-container">
+      <TransparencyControl onTransparencyChange={setTerminalTransparency} />
       <div className="terminal-frame">
-        <div className="terminal-screen">
+        <div 
+          className="terminal-screen"
+          style={{ 
+            backgroundColor: `rgba(10, 14, 26, ${terminalTransparency})`,
+            '--terminal-transparency': terminalTransparency
+          } as React.CSSProperties & { '--terminal-transparency': number }}
+        >
           <div className="terminal-header">
             <div className="terminal-header-left">
               <span className="terminal-prompt">RUSTSPIRE_ARCHIVE::</span>
@@ -170,6 +180,8 @@ function App() {
       </div>
       <div className="scanlines"></div>
       <div className="terminal-glow"></div>
+      <div className="corrosion-particles"></div>
+      <div className="acidic-rain"></div>
     </div>
   );
 }
