@@ -18,8 +18,38 @@ function App() {
   } = useStoryEngine();
 
   const [terminalTransparency, setTerminalTransparency] = useState(0.85);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const choiceButtonsRef = useRef<HTMLButtonElement[]>([]);
+
+  // Fullscreen functionality
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().then(() => {
+        setIsFullscreen(true);
+      }).catch(err => {
+        console.error('Error attempting to enable fullscreen:', err);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsFullscreen(false);
+      }).catch(err => {
+        console.error('Error attempting to exit fullscreen:', err);
+      });
+    }
+  };
+
+  // Listen for fullscreen changes
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -182,6 +212,13 @@ function App() {
       <div className="terminal-glow"></div>
       <div className="corrosion-particles"></div>
       <div className="acidic-rain"></div>
+      <button 
+        className="fullscreen-btn"
+        onClick={toggleFullscreen}
+        title={isFullscreen ? 'Exit Fullscreen (Esc)' : 'Enter Fullscreen (F11)'}
+      >
+        <span className="fullscreen-icon">{isFullscreen ? '⤓' : '⤢'}</span>
+      </button>
     </div>
   );
 }

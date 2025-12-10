@@ -26,8 +26,39 @@ export const RelationshipMeter = ({ state }: RelationshipMeterProps) => {
     return ((value + 100) / 2);
   };
 
+  const getPortraitExpression = (value: number): string => {
+    if (value >= 60) return 'happy';
+    if (value >= 30) return 'neutral-positive';
+    if (value >= 0) return 'neutral';
+    if (value >= -30) return 'neutral-negative';
+    return 'hostile';
+  };
+
   return (
     <div className="relationship-meter">
+      <div className="relationship-portraits">
+        <div className="portrait-container">
+          <div className={`pixel-portrait portrait-kael ${getPortraitExpression(state.trustLyra)}`}>
+            <div className="portrait-label">KAEL</div>
+          </div>
+        </div>
+        <div className="portrait-connection">
+          <div 
+            className="connection-line"
+            style={{
+              backgroundColor: getTrustColor(state.trustLyra),
+              boxShadow: `0 0 10px ${getTrustColor(state.trustLyra)}`,
+            }}
+          />
+          <div className="connection-value">{state.trustLyra}</div>
+        </div>
+        <div className="portrait-container">
+          <div className={`pixel-portrait portrait-lyra ${getPortraitExpression(state.trustLyra)}`}>
+            <div className="portrait-label">LYRA</div>
+          </div>
+        </div>
+      </div>
+
       <div className="relationship-item">
         <div className="relationship-label">
           <span>Kael & Lyra</span>
