@@ -76,12 +76,14 @@ function App() {
   const sceneText = getSceneText(currentScene);
   const choices = getSceneChoices(currentScene);
 
+  const endingType = currentScene.isEnding ? currentScene.endingType : null;
+  
   return (
-    <div className="terminal-container">
+    <div className={`terminal-container ${endingType ? `ending-${endingType}-bg` : ''}`}>
       <TransparencyControl onTransparencyChange={setTerminalTransparency} />
       <div className="terminal-frame">
         <div 
-          className="terminal-screen"
+          className={`terminal-screen ${endingType ? `ending-${endingType}-screen` : ''}`}
           style={{ 
             backgroundColor: `rgba(10, 14, 26, ${terminalTransparency})`,
             '--terminal-transparency': terminalTransparency

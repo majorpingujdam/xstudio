@@ -344,6 +344,180 @@ body::after {
   padding: 40px 20px;
   perspective: 1000px;
   position: relative;
+  transition: all 1s ease;
+}
+
+/* Ending Background Effects */
+.ending-tragic-bg {
+  background: 
+    radial-gradient(circle at center, rgba(255, 68, 68, 0.1) 0%, transparent 70%),
+    linear-gradient(135deg, rgba(0, 20, 10, 0.3) 0%, rgba(0, 30, 20, 0.25) 100%),
+    url('/images/pxArt.png');
+  animation: tragic-bg-pulse 4s ease-in-out infinite;
+}
+
+@keyframes tragic-bg-pulse {
+  0%, 100% { filter: brightness(0.9) contrast(1.1); }
+  50% { filter: brightness(0.85) contrast(1.15); }
+}
+
+.ending-bittersweet-bg {
+  background: 
+    radial-gradient(circle at center, rgba(255, 170, 0, 0.08) 0%, transparent 70%),
+    linear-gradient(135deg, rgba(0, 20, 10, 0.3) 0%, rgba(0, 30, 20, 0.25) 100%),
+    url('/images/pxArt.png');
+  animation: bittersweet-bg-warm 5s ease-in-out infinite;
+}
+
+@keyframes bittersweet-bg-warm {
+  0%, 100% { filter: brightness(1) sepia(0.1); }
+  50% { filter: brightness(1.05) sepia(0.15); }
+}
+
+.ending-revolt-bg {
+  background: 
+    radial-gradient(circle at 30% 50%, rgba(255, 100, 0, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(255, 68, 68, 0.12) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(0, 20, 10, 0.3) 0%, rgba(0, 30, 20, 0.25) 100%),
+    url('/images/pxArt.png');
+  animation: revolt-bg-flicker 0.8s ease-in-out infinite;
+}
+
+@keyframes revolt-bg-flicker {
+  0%, 100% { filter: brightness(1) contrast(1.1); }
+  25% { filter: brightness(1.1) contrast(1.15); }
+  50% { filter: brightness(0.95) contrast(1.05); }
+  75% { filter: brightness(1.05) contrast(1.12); }
+}
+
+.ending-reform-bg {
+  background: 
+    radial-gradient(circle at center, rgba(0, 255, 65, 0.12) 0%, transparent 70%),
+    linear-gradient(135deg, rgba(0, 20, 10, 0.3) 0%, rgba(0, 30, 20, 0.25) 100%),
+    url('/images/pxArt.png');
+  animation: reform-bg-brighten 6s ease-in-out infinite;
+}
+
+@keyframes reform-bg-brighten {
+  0%, 100% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(1.1) saturate(1.2); }
+}
+
+.ending-secret-bg {
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(0, 20, 10, 0.3) 0%, rgba(0, 30, 20, 0.25) 100%),
+    url('/images/pxArt.png');
+  animation: secret-bg-shift 8s ease-in-out infinite;
+}
+
+@keyframes secret-bg-shift {
+  0%, 100% { filter: brightness(1) hue-rotate(0deg); }
+  33% { filter: brightness(1.05) hue-rotate(5deg); }
+  66% { filter: brightness(0.98) hue-rotate(-3deg); }
+}
+
+/* Ending Screen Effects */
+.ending-tragic-screen {
+  border-color: rgba(255, 68, 68, 0.5) !important;
+  box-shadow: 
+    0 0 30px rgba(255, 68, 68, 0.4),
+    0 0 60px rgba(255, 68, 68, 0.2),
+    inset 0 0 30px rgba(0, 0, 0, 0.4),
+    0 15px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.ending-bittersweet-screen {
+  border-color: rgba(255, 170, 0, 0.5) !important;
+  box-shadow: 
+    0 0 30px rgba(255, 170, 0, 0.4),
+    0 0 60px rgba(255, 200, 50, 0.2),
+    inset 0 0 30px rgba(0, 0, 0, 0.4),
+    0 15px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.ending-revolt-screen {
+  border-color: rgba(255, 100, 0, 0.6) !important;
+  box-shadow: 
+    0 0 40px rgba(255, 100, 0, 0.5),
+    0 0 80px rgba(255, 68, 68, 0.3),
+    inset 0 0 30px rgba(255, 68, 68, 0.1),
+    0 15px 40px rgba(0, 0, 0, 0.6) !important;
+  animation: revolt-screen-flicker 0.6s ease-in-out infinite;
+}
+
+@keyframes revolt-screen-flicker {
+  0%, 100% { 
+    box-shadow: 
+      0 0 40px rgba(255, 100, 0, 0.5),
+      0 0 80px rgba(255, 68, 68, 0.3),
+      inset 0 0 30px rgba(255, 68, 68, 0.1),
+      0 15px 40px rgba(0, 0, 0, 0.6);
+  }
+  50% { 
+    box-shadow: 
+      0 0 50px rgba(255, 120, 0, 0.7),
+      0 0 100px rgba(255, 100, 0, 0.4),
+      inset 0 0 35px rgba(255, 100, 0, 0.15),
+      0 15px 40px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.ending-reform-screen {
+  border-color: rgba(0, 255, 65, 0.5) !important;
+  box-shadow: 
+    0 0 40px rgba(0, 255, 65, 0.5),
+    0 0 80px rgba(0, 255, 100, 0.3),
+    inset 0 0 30px rgba(0, 255, 65, 0.1),
+    0 15px 40px rgba(0, 0, 0, 0.6) !important;
+  animation: reform-screen-pulse 4s ease-in-out infinite;
+}
+
+@keyframes reform-screen-pulse {
+  0%, 100% { 
+    box-shadow: 
+      0 0 40px rgba(0, 255, 65, 0.5),
+      0 0 80px rgba(0, 255, 100, 0.3),
+      inset 0 0 30px rgba(0, 255, 65, 0.1),
+      0 15px 40px rgba(0, 0, 0, 0.6);
+  }
+  50% { 
+    box-shadow: 
+      0 0 60px rgba(0, 255, 100, 0.7),
+      0 0 120px rgba(0, 255, 65, 0.4),
+      inset 0 0 40px rgba(0, 255, 65, 0.2),
+      0 15px 40px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.ending-secret-screen {
+  border-color: rgba(0, 212, 255, 0.5) !important;
+  box-shadow: 
+    0 0 35px rgba(0, 212, 255, 0.5),
+    0 0 70px rgba(0, 255, 255, 0.3),
+    inset 0 0 30px rgba(0, 212, 255, 0.1),
+    0 15px 40px rgba(0, 0, 0, 0.6) !important;
+  animation: secret-screen-shift 5s ease-in-out infinite;
+}
+
+@keyframes secret-screen-shift {
+  0%, 100% { 
+    box-shadow: 
+      0 0 35px rgba(0, 212, 255, 0.5),
+      0 0 70px rgba(0, 255, 255, 0.3),
+      inset 0 0 30px rgba(0, 212, 255, 0.1),
+      0 15px 40px rgba(0, 0, 0, 0.6);
+    filter: hue-rotate(0deg);
+  }
+  50% { 
+    box-shadow: 
+      0 0 45px rgba(0, 255, 255, 0.6),
+      0 0 90px rgba(100, 200, 255, 0.4),
+      inset 0 0 35px rgba(0, 255, 255, 0.15),
+      0 15px 40px rgba(0, 0, 0, 0.6);
+    filter: hue-rotate(10deg);
+  }
 }
 
 /* Transparency Control */
@@ -1285,34 +1459,187 @@ body::after {
   text-shadow: 0 0 5px currentColor;
 }
 
+/* Tragic Ending - Red, fading, somber */
 .ending-tragic {
   background: rgba(255, 68, 68, 0.1);
   border-color: var(--terminal-error);
   color: var(--terminal-error);
+  animation: tragic-pulse 3s ease-in-out infinite;
 }
 
+@keyframes tragic-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.3);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 68, 68, 0.6);
+    opacity: 0.8;
+  }
+}
+
+/* Bittersweet Ending - Warm orange/gold, gentle glow */
 .ending-bittersweet {
   background: rgba(255, 170, 0, 0.1);
   border-color: var(--terminal-warning);
   color: var(--terminal-warning);
+  animation: bittersweet-glow 4s ease-in-out infinite;
 }
 
+@keyframes bittersweet-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 15px rgba(255, 170, 0, 0.4),
+      inset 0 0 20px rgba(255, 170, 0, 0.1);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(255, 200, 50, 0.6),
+      inset 0 0 30px rgba(255, 170, 0, 0.2);
+    filter: brightness(1.2);
+  }
+}
+
+/* Revolt Ending - Intense red, flickering fire effect */
 .ending-revolt {
   background: rgba(255, 68, 68, 0.15);
   border-color: var(--terminal-error);
   color: var(--terminal-error);
+  animation: revolt-flicker 0.5s ease-in-out infinite;
+  position: relative;
 }
 
+.ending-revolt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 100, 0, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(255, 68, 68, 0.3) 0%, transparent 50%);
+  animation: fire-flicker 0.3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes revolt-flicker {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(255, 68, 68, 0.5);
+    filter: brightness(1);
+  }
+  25% {
+    box-shadow: 0 0 35px rgba(255, 100, 0, 0.7);
+    filter: brightness(1.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+    filter: brightness(0.95);
+  }
+  75% {
+    box-shadow: 0 0 40px rgba(255, 120, 0, 0.8);
+    filter: brightness(1.15);
+  }
+}
+
+@keyframes fire-flicker {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+/* Reform Ending - Green, hopeful, expanding light */
 .ending-reform {
   background: rgba(0, 255, 65, 0.15);
   border-color: var(--terminal-green);
   color: var(--terminal-green);
+  animation: reform-expand 5s ease-in-out infinite;
 }
 
+@keyframes reform-expand {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(0, 255, 65, 0.4),
+      inset 0 0 30px rgba(0, 255, 65, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(0, 255, 100, 0.6),
+      0 0 80px rgba(0, 255, 65, 0.3),
+      inset 0 0 40px rgba(0, 255, 65, 0.2);
+    transform: scale(1.02);
+  }
+}
+
+/* Secret Ending - Cyan, mysterious, shifting */
 .ending-secret {
   background: rgba(0, 212, 255, 0.15);
   border-color: var(--terminal-cyan);
   color: var(--terminal-cyan);
+  animation: secret-shift 6s ease-in-out infinite;
+  position: relative;
+}
+
+.ending-secret::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 212, 255, 0.1) 0%,
+    transparent 25%,
+    transparent 75%,
+    rgba(0, 255, 255, 0.1) 100%
+  );
+  animation: secret-sweep 4s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes secret-shift {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(0, 212, 255, 0.4),
+      inset 0 0 25px rgba(0, 212, 255, 0.1);
+    filter: hue-rotate(0deg);
+  }
+  33% {
+    box-shadow: 
+      0 0 30px rgba(0, 255, 255, 0.5),
+      inset 0 0 30px rgba(0, 255, 255, 0.15);
+    filter: hue-rotate(10deg);
+  }
+  66% {
+    box-shadow: 
+      0 0 25px rgba(100, 200, 255, 0.5),
+      inset 0 0 28px rgba(100, 200, 255, 0.12);
+    filter: hue-rotate(-5deg);
+  }
+}
+
+@keyframes secret-sweep {
+  0% {
+    transform: translateX(-100%) translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%);
+    opacity: 0;
+  }
 }
 
 .ending-summary {
