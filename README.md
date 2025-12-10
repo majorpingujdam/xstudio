@@ -33,6 +33,27 @@ npm run build
 
 The built files will be in the `dist` directory.
 
+## Deployment to GitHub Pages
+
+The project is configured to deploy to GitHub Pages automatically via GitHub Actions.
+
+1. **Enable GitHub Pages**:
+   - Go to your repository Settings → Pages
+   - Source: Deploy from a branch
+   - Branch: `gh-pages` / `root`
+
+2. **The workflow will automatically**:
+   - Build the project when you push to `main`
+   - Deploy to GitHub Pages
+
+3. **If deploying manually**:
+   ```bash
+   npm run build
+   ```
+   Then push the `dist` folder contents to the `gh-pages` branch.
+
+**Note**: If your repository name is different from `Final-prototype`, update the `base` path in `vite.config.ts` to match your repository name.
+
 ## Story Structure
 
 The game features:
@@ -77,6 +98,3 @@ src/
 - TypeScript
 - Vite
 - CSS3 (with animations and gradients)
-
-
-
