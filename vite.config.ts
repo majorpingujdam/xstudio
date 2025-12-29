@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 // For GitHub Pages: set base to '/your-repo-name/' if deploying to a subdirectory
-// IMPORTANT: Change 'Final-prototype' to match your actual GitHub repository name
-const repoName = 'Final-prototype';
+// IMPORTANT: Change 'xstudio' to match your actual GitHub repository name
+const repoName = 'xstudio';
 const base = process.env.NODE_ENV === 'production' ? `/${repoName}/` : '/';
 
 export default defineConfig({
