@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStoryEngine } from './story/StoryEngine';
 import { ChoiceButton } from './components/ChoiceButton';
 import { TowerSidebar } from './components/TowerSidebar';
@@ -14,13 +14,10 @@ function App() {
     handleChoice,
     getSceneText,
     getSceneChoices,
-    restart,
   } = useStoryEngine();
 
   const [terminalTransparency, setTerminalTransparency] = useState(0.85);
   const [isFullscreen, setIsFullscreen] = useState(false);
-
-  const choiceButtonsRef = useRef<HTMLButtonElement[]>([]);
 
   // Fullscreen functionality
   const toggleFullscreen = () => {

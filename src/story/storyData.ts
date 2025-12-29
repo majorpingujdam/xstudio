@@ -337,7 +337,7 @@ Lyra is somewhere nearby—you can feel her presence, but whether she'll stand w
     level: 'epilogue',
     isEnding: true,
     endingType: 'tragic',
-    text: (state: StoryState) => `The Skyborn enforcers move without mercy. You try to show them the proof, but it's too late—or not enough. The guards close in, and the last thing you see is Lyra's face, her expression a mix of horror and helplessness.
+    text: () => `The Skyborn enforcers move without mercy. You try to show them the proof, but it's too late—or not enough. The guards close in, and the last thing you see is Lyra's face, her expression a mix of horror and helplessness.
 
 Your body is cast into the corrosive ocean below, the proof lost to the depths.
 
@@ -358,7 +358,7 @@ Your body is cast into the corrosive ocean below, the proof lost to the depths.
     level: 'epilogue',
     isEnding: true,
     endingType: 'bittersweet',
-    text: (state: StoryState) => `You disappear into the lower levels, presumed dead by the Skyborn. But Lyra doesn't forget. Using her status and influence, she begins to make quiet changes: cleaner water filters distributed to the Brinefolk, better access to medical supplies, small but meaningful improvements.
+    text: () => `You disappear into the lower levels, presumed dead by the Skyborn. But Lyra doesn't forget. Using her status and influence, she begins to make quiet changes: cleaner water filters distributed to the Brinefolk, better access to medical supplies, small but meaningful improvements.
 
 The system remains, but it softens. The divide between Skyborn and Brinefolk doesn't disappear, but it becomes less absolute. You live in the shadows, knowing that change is happening, even if slowly.
 
@@ -402,7 +402,7 @@ ${state.trustLyra >= 30 ? `You and Lyra find each other in the chaos, fighting s
     level: 'epilogue',
     isEnding: true,
     endingType: 'reform',
-    text: (state: StoryState) => `With Lyra at your side, you reveal the truth to the entire Rustspire. The proof is undeniable, and her support gives it weight. The Skyborn Council is forced to listen.
+    text: () => `With Lyra at your side, you reveal the truth to the entire Rustspire. The proof is undeniable, and her support gives it weight. The Skyborn Council is forced to listen.
 
 A new council forms—Skyborn and Brinefolk, working together. It's not perfect, and the old divisions don't disappear overnight, but for the first time, there's hope. Clean water is distributed more fairly, and the levels begin to blur.
 
@@ -423,15 +423,18 @@ A new council forms—Skyborn and Brinefolk, working together. It's not perfect,
     level: 'epilogue',
     isEnding: true,
     endingType: 'secret',
-    text: (state: StoryState) => `You abandon the Summit, the proof still in your possession. The Rustspire is too broken, too entrenched. Some battles can't be won from within.
+    text: (state: StoryState) => {
+      const lyraComes = state.trustLyra >= 30;
+      return `You abandon the Summit, the proof still in your possession. The Rustspire is too broken, too entrenched. Some battles can't be won from within.
 
-${state.trustLyra >= 30 ? `Lyra finds you before you leave. "Take me with you," she says. "I can't stay here, not knowing what I know now."` : `You leave alone, slipping back into the corrosive waters.`}
+${lyraComes ? `Lyra finds you before you leave. "Take me with you," she says. "I can't stay here, not knowing what I know now."` : `You leave alone, slipping back into the corrosive waters.`}
 
 You dive deep, searching for other towers, other possibilities. The Rustspire fades behind you, a monument to a system you chose to escape rather than reform.
 
-**Epilogue:** The ocean is vast, and somewhere in its depths, there might be other towers, other stories. You and ${state.trustLyra >= 30 ? 'Lyra' : 'the proof'} carry the hope of something different, something better. The ending is ambiguous, but it's yours.
+**Epilogue:** The ocean is vast, and somewhere in its depths, there might be other towers, other stories. You and ${lyraComes ? 'Lyra' : 'the proof'} carry the hope of something different, something better. The ending is ambiguous, but it's yours.
 
-*Ending: Secret Ocean*`,
+*Ending: Secret Ocean*`;
+    },
     choices: [
       {
         id: 'restart',
